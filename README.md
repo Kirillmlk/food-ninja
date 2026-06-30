@@ -77,3 +77,9 @@ composer dev
 ```bash
 composer phpstan
 ```
+
+## Скриншоты
+
+![Главная](docs/images/1.png)
+![Регистрация](docs/images/2.png)
+![Кабинет — редактирование ссылки](docs/images/3.png)
