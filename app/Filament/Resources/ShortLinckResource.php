@@ -3,8 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ShortLinckResource\Pages;
+use App\Filament\Resources\ShortLinckResource\RelationManagers;
 use App\Models\ShortLink;
 use Filament\Forms;
+use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -27,10 +30,15 @@ class ShortLinckResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('original_url')
-                ->label('URL')
-                ->required()
-                ->url(),
+                Placeholder::make('short_url')
+                    ->label('Короткая ссылка')
+                    ->content(fn (?ShortLink $record): string => $record?->code ? url($record->code) : '')
+                    ->visibleOn('edit'),
+
+                TextInput::make('original_url')
+                    ->label('Оригинальный URL')
+                    ->required()
+                    ->url(),
             ]);
     }
 
@@ -39,8 +47,8 @@ class ShortLinckResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('code')
-                    ->label('Код')
-                    ->searchable(),
+                    ->label('Короткая ссылка')
+                    ->formatStateUsing(fn (string $state): string => url($state)),
 
                 TextColumn::make('original_url')
                     ->label('URL')
@@ -71,7 +79,7 @@ class ShortLinckResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\UrlClicksRelationManager::class,
         ];
     }
 
