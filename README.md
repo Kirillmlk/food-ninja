@@ -8,6 +8,7 @@
 - Frontend: `Vue 3`, `Inertia.js`, `Vite`, `Tailwind CSS`
 - Auth: `Laravel Breeze`
 - База данных: `SQLite` (по умолчанию) или `MySQL`
+- Dev-tools: `PHPStan` (level 7), `Rector` + `rector-laravel`
 
 ## Что реализовано
 
@@ -72,11 +73,27 @@ composer dev
 3. Открыть короткую ссылку вида `http://127.0.0.1:8000/{code}` произойдёт редирект.
 4. В кабинете открыть ссылку на редактирование на вкладке кликов появится запись с IP и временем.
 
-## Статический анализ
+## Статический анализ и рефакторинг
+
+В проекте используются **PHPStan** и **Rector** для проверки и улучшения PHP-кода.
 
 ```bash
 composer phpstan
 ```
+
+Статический анализ (level 7, конфиг: `phpstan.neon`).
+
+```bash
+composer rector:dry
+```
+
+Просмотр предлагаемых изменений Rector без применения.
+
+```bash
+composer rector
+```
+
+Применение автоматических правок Rector (конфиг: `rector.php`).
 
 ## Скриншоты
 
