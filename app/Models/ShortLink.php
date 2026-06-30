@@ -14,11 +14,13 @@ class ShortLink extends Model
         'code',
     ];
 
+    /** @return BelongsTo<User, $this> */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /** @return HasMany<UrlClick, $this> */
     public function urlClicks(): HasMany
     {
         return $this->hasMany(UrlClick::class);

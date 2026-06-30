@@ -20,11 +20,16 @@ class ShortLinckResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    /**
+     * @return Builder<ShortLink>
+     */
+    #[\Override]
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()->where('user_id', auth()->id());
     }
 
+    #[\Override]
     public static function form(Form $form): Form
     {
         return $form
@@ -41,6 +46,7 @@ class ShortLinckResource extends Resource
             ]);
     }
 
+    #[\Override]
     public static function table(Table $table): Table
     {
         return $table
@@ -75,6 +81,7 @@ class ShortLinckResource extends Resource
             ]);
     }
 
+    #[\Override]
     public static function getRelations(): array
     {
         return [
@@ -82,6 +89,7 @@ class ShortLinckResource extends Resource
         ];
     }
 
+    #[\Override]
     public static function getPages(): array
     {
         return [
@@ -90,4 +98,5 @@ class ShortLinckResource extends Resource
             'edit' => Pages\EditShortLinck::route('/{record}/edit'),
         ];
     }
+
 }

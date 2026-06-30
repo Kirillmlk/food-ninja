@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class ShortLinkService
 {
     public const CODE_LENGTH = 6;
-    public function generateCode()
+    public function generateCode(): string
     {
         do {
             $code = Str::random(self::CODE_LENGTH);

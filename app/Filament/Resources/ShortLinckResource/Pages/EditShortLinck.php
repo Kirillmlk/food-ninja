@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\ShortLinckResource\Pages;
 
 use App\Filament\Resources\ShortLinckResource;
@@ -10,6 +12,7 @@ class EditShortLinck extends EditRecord
 {
     protected static string $resource = ShortLinckResource::class;
 
+    #[\Override]
     protected function getHeaderActions(): array
     {
         return [

@@ -8,21 +8,30 @@ use App\Services\ShortLinkService;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 
+/**
+ * @property ShortLink $record
+ */
 class CreateShortLinck extends CreateRecord
 {
     protected static string $resource = ShortLinckResource::class;
 
+    #[\Override]
     protected function handleRecordCreation(array $data): ShortLink
     {
+        $user = auth()->user();
+        if ($user === null) {
+            abort(403);
+        }
+
         return app(ShortLinkService::class)->createForUser(
-            auth()->id(),
+            (int) $user->id,
             $data['original_url'],
         );
     }
 
     protected function afterCreate(): void
     {
-        $shortUrl = url($this->record->code);
+        $shortUrl = (string) url($this->record->code);
 
         Notification::make()
             ->title('Короткая ссылка создана')
@@ -31,6 +40,7 @@ class CreateShortLinck extends CreateRecord
             ->send();
     }
 
+    #[\Override]
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('edit', ['record' => $this->record]);

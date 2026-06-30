@@ -13,12 +13,16 @@ class UrlClick extends Model
         'clicked_at',
     ];
 
-    protected $casts = [
-        'clicked_at' => 'datetime',
-    ];
-
+    /** @return BelongsTo<ShortLink, $this> */
     public function shortLink(): BelongsTo
     {
         return $this->belongsTo(ShortLink::class);
+    }
+    #[\Override]
+    protected function casts(): array
+    {
+        return [
+            'clicked_at' => 'datetime',
+        ];
     }
 }
