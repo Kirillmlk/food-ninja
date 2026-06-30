@@ -27,7 +27,13 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $this->assertContains($response->getStatusCode(), [302, 409]);
+
+        if ($response->getStatusCode() === 409) {
+            $response->assertHeader('X-Inertia-Location', '/admin');
+        } else {
+            $response->assertRedirect('/admin');
+        }
     }
 
     public function test_users_can_not_authenticate_with_invalid_password(): void

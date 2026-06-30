@@ -57,5 +57,14 @@ const verificationLinkSent = computed(
                 >
             </div>
         </form>
+
+        <div class="mt-5">
+            <a
+                href="/admin"
+                class="inline-flex w-full items-center justify-center rounded-md bg-orange-500 px-5 py-3 text-center font-medium text-white transition hover:bg-orange-400"
+            >
+                Войти в Filament
+            </a>
+        </div>
     </GuestLayout>
 </template>

@@ -26,6 +26,12 @@ class RegistrationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $this->assertContains($response->getStatusCode(), [302, 409]);
+
+        if ($response->getStatusCode() === 409) {
+            $response->assertHeader('X-Inertia-Location', '/admin');
+        } else {
+            $response->assertRedirect('/admin');
+        }
     }
 }
