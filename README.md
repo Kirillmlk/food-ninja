@@ -7,7 +7,7 @@
 - Backend: `Laravel 13`, `PHP 8.3`, `Filament 3`
 - Frontend: `Vue 3`, `Inertia.js`, `Vite`, `Tailwind CSS`
 - Auth: `Laravel Breeze`
-- База данных: `SQLite` (по умолчанию) или `MySQL`
+- База данных: `MySQL`
 - Dev-tools: `PHPStan` (level 7), `Rector` + `rector-laravel`
 
 ## Что реализовано
